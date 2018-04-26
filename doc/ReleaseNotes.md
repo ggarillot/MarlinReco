@@ -1,6 +1,34 @@
+# v01-24-01
+
+* 2018-04-18 Ete Remi ([PR#51](https://github.com/ilcsoft/MarlinReco/pull/51))
+  - RecoMCThruthLinker processor
+      - Turned WARNING message to DEBUG9 to avoid log pollution
+      - this warning occurs only for the SDHcal case where one SimCalorimeterHit can create more than CalorimeterHit
+
+# v01-24
+
+* 2018-04-10 Guillaume ([PR#48](https://github.com/ilcsoft/MarlinReco/pull/48))
+  - SDHCAL digitizer : 
+     - Switch order of the LCRelation collection between SDHCAL SimCalorimeterHits and Digitized CalorimeterHits (now from CalorimeterHit to SimCalorimeterHit)
+
+* 2018-04-18 Carl Mikael Berggren ([PR#50](https://github.com/ilcsoft/MarlinReco/pull/50))
+  - improved TrueJet processor:
+       - Fixed crash due to index out-of-range
+       - Remove all compiler warnings except local shadow (cheked to be OK)
+       -  id of initial ColourNeutrals fixed (should be a boson (W,Z,H))
+       - MCParticle collection does not need to start with the beam-particles, back-tracking now also
+  gracefully stops if the first entry is reached. This should allow for usage also for the DBD-250 samples, in which the initial beam-particles are missing in the MCParticle collections.
+       - nitty-gritty special cases in history fixed.
+       - Now also works for higgs-samples *except for h->gluon gluon*, which will need a completely different treatment fro back-track through the parton shower, as there is no quark-line to follow...
+
+* 2018-04-17 Frank Gaede ([PR#49](https://github.com/ilcsoft/MarlinReco/pull/49))
+  - add new package TimeOfFlight
+       - use TOFEstimators processor to compute TOF parameters
+       - will be added as PID object to the ReconstructedParticles
+
 # v01-23
 
-* 2018-01-31 Strahinja Lukić ([PR#37](https://github.com/iLCSoft/MarlinReco/pull/37))
+* 2018-01-31 Strahinja Lukic ([PR#37](https://github.com/iLCSoft/MarlinReco/pull/37))
   Updates of SiTracker_dEdxProcessor:
   
   - Cleaned up unnecessary code.
@@ -12,7 +40,7 @@
   
   -   Added minor runtime protections.
 
-* 2018-01-09 Strahinja Lukić ([PR#35](https://github.com/iLCSoft/MarlinReco/pull/35))
+* 2018-01-09 Strahinja Lukic ([PR#35](https://github.com/iLCSoft/MarlinReco/pull/35))
   - `SiTracker_dEdxProcessor` was adapted to determine the barrel/endcap type of tracker detector by checking the layering extension, rather than the type flag as before. 
   - A bug was corrected in `SiTracker_dEdxProcessor` that caused miscalculation of total sensor thickness for some of the available dEdx estimators.
 
@@ -50,9 +78,9 @@
     - namespace `DDSurfaces` -> `dd4hep::rec`
 
 * 2017-12-12 Frank Gaede ([PR#34](https://github.com/iLCSoft/MarlinReco/pull/34))
-  - Remove all warnings of type `should be initialized in the member initialization list [-Weffc++]`
-  - Remove all warnings of type `unused parameter ‘run’` for `processRunHeader( LCRunHeader*  /*run*/)`
-  - Remove all warnings of type `unused parameter ‘evt’` for `check( LCEvent *  /*evt*/ )`
+  - Remove all warnings of type "should be initialized in the member initialization list [-Weffc++]"
+  - Remove all warnings of type "unused parameter 'run'" for processRunHeader( LCRunHeader*  /*run*/)
+  - Remove all warnings of type "unused parameter 'evt'" for "check( LCEvent *  /*evt*/ )"
 
 * 2018-03-23 Ulrich Einhaus ([PR#44](https://github.com/iLCSoft/MarlinReco/pull/44))
   - Compute_dEdXProcessor:
